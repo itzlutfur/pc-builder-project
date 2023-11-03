@@ -327,9 +327,11 @@ void chooseMotherBoard()
     printInfo();
 
 chooseMotherBoard:
-    printf("\n Choose a Mother Board From Here: [1/2/3/4]");
+    printf("\n Choose a Mother Board From Here: [1/2/3/4] or 10 to back main\n");
     displayItem(MotherBoard);
     int itemNum;
+    if(itemNum == 10)
+        productListing();
     scanf("%d", &itemNum);
     if(itemNum>=1 && itemNum<=4)
     {
@@ -346,17 +348,19 @@ chooseMotherBoard:
 
 }
 
-//Fuction to choose Casing
+//Function to choose Casing
 void chooseCasing()
 {
     system("cls");
     printInfo();
 
 chooseCasing:
-    printf("\n Choose a Casing From Here: [1/2/3/4]");
+    printf("\n Choose a Casing From Here: [1/2/3/4] or 10 to back main\n");
     displayItem(Casing);
     int itemNum;
     scanf("%d", &itemNum);
+    if(itemNum == 10)
+        productListing();
     if(itemNum>=1 && itemNum<=4)
     {
         itemCount++;
@@ -372,17 +376,19 @@ chooseCasing:
 
 }
 
-// Fuction to choose Power Supply
+// Function to choose Power Supply
 void choosePowerSupply()
 {
     system("cls");
     printInfo();
 
 choosePowerSupply:
-    printf("\n Choose a Power Supply From Here: [1/2/3/4]");
+    printf("\n Choose a Power Supply From Here: [1/2/3/4] or 10 to back main\n");
     displayItem(PowerSupply);
     int itemNum;
     scanf("%d", &itemNum);
+    if(itemNum == 10)
+        productListing();
     if(itemNum>=1 && itemNum<=4)
     {
         itemCount++;
@@ -405,10 +411,12 @@ void chooseGraphicsCard()
     printInfo();
 
 chooseGraphicsCard:
-    printf("\n Choose a Graphics Card From Here: [1/2/3/4]");
+    printf("\n Choose a Graphics Card From Here: [1/2/3/4] or 10 to back main\n");
     displayItem(GraphicsCard);
     int itemNum;
     scanf("%d", &itemNum);
+    if(itemNum == 10)
+        productListing();
     if(itemNum>=1 && itemNum<=4)
     {
         itemCount++;
@@ -431,10 +439,12 @@ void chooseProcessor()
     printInfo();
 
 chooseProcessor:
-    printf("\n Choose a Processor From Here: [1/2/3/4]");
+    printf("\n Choose a Processor From Here: [1/2/3/4] or 10 to back main\n");
     displayItem(Processor);
     int itemNum;
     scanf("%d", &itemNum);
+    if(itemNum == 10)
+        productListing();
     if(itemNum>=1 && itemNum<=4)
     {
         itemCount++;
@@ -456,8 +466,11 @@ void deleteSelectedItem()
     displayTotalItem();
     if(itemCount>=1)
     {
-        printf("\n\nEnter the element position to delete : ");
+        printf("\n\nEnter the element position to delete : or -1 to back main\n");
         scanf("%d", &elementPosition);
+
+        if(elementPosition == -1)
+            productListing();
 
         /* Invalid delete position */
         if(elementPosition <=0 && elementPosition>itemCount)
@@ -594,7 +607,19 @@ void productListing()
         productListing();
         break;
     }
+
+    case 0:
+    {
+        printf("\nEnding the Program. Thanks for choosing Bangi PC Building Solution.See You Later.  \n\n");
+        exit(0);
     }
+    default :
+    {
+        printf("\nInvalid Choice. Select From the option\n");
+        productListing();
+    }
+    }
+
 }
 
 int main()
