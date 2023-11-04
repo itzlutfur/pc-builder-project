@@ -199,7 +199,7 @@ void backMain()
 void printInfo()
 {
     printf("\n\t\t\t===================== ** Bangi PC Building Solution ** =====================");
-    printf("\n\t\t\t===================== ** User Name : %s\n\n",CustomerInfo.name);
+    printf("\n\t\t\t===================== ** User Name : %s\n\n", CustomerInfo.name);
 }
 
 void totalPriceCount()
@@ -207,9 +207,9 @@ void totalPriceCount()
     totalPrice = 0;
     struct list *temp;
     temp = TotalItem;
-    while(temp!=NULL)
+    while (temp != NULL)
     {
-        totalPrice +=temp->price;
+        totalPrice += temp->price;
         temp = temp->next;
     }
 }
@@ -238,11 +238,11 @@ void displayTotalItem()
     if (itemCount >= 1)
     {
         printf("It's Your Build: \n");
-        int i=1;
+        int i = 1;
         struct list *temp = TotalItem;
-        while(temp != NULL)
+        while (temp != NULL)
         {
-            printf("%d  %s\n",i++, temp->name);
+            printf("%d  %s\n", i++, temp->name);
             temp = temp->next;
         }
         printf("\n  =============================================================================================== ");
@@ -256,13 +256,11 @@ void displayTotalItem()
     }
 }
 
-
-
 void addItem(struct list *nodeItem)
 {
-    if(itemCount == 1)
+    if (itemCount == 1)
     {
-        TotalItem = (struct list*) malloc(sizeof(list));
+        TotalItem = (struct list *)malloc(sizeof(list));
         strcpy(TotalItem->name, nodeItem->name);
         TotalItem->price = nodeItem->price;
         TotalItem->next = NULL;
@@ -272,14 +270,14 @@ void addItem(struct list *nodeItem)
     else
     {
         struct list *temp;
-        temp = (struct list*) malloc(sizeof(list));
+        temp = (struct list *)malloc(sizeof(list));
         strcpy(temp->name, nodeItem->name);
         temp->price = nodeItem->price;
         position->next = temp;
         temp->next = NULL;
         position = temp;
     }
-    printf("\n Successfully Added! %s\n",nodeItem->name);
+    printf("\n Successfully Added! %s\n", nodeItem->name);
 }
 
 void searchItem(int itemNum, struct list *itemNode)
@@ -287,7 +285,7 @@ void searchItem(int itemNum, struct list *itemNode)
     list *temp;
     temp = itemNode;
 
-    while(--itemNum)
+    while (--itemNum)
         temp = temp->next;
     addItem(temp);
 }
@@ -303,10 +301,10 @@ choiceMonitor:
     displayItem(Monitor);
     int itemNum;
     scanf("%d", &itemNum);
-    if(itemNum == 10)
+    if (itemNum == 10)
         productListing();
 
-    if(itemNum>=1 && itemNum<=4)
+    if (itemNum >= 1 && itemNum <= 4)
     {
         itemCount++;
         searchItem(itemNum, Monitor);
@@ -330,10 +328,10 @@ chooseMotherBoard:
     printf("\n Choose a Mother Board From Here: [1/2/3/4] or 10 to back main\n");
     displayItem(MotherBoard);
     int itemNum;
-    if(itemNum == 10)
+    if (itemNum == 10)
         productListing();
     scanf("%d", &itemNum);
-    if(itemNum>=1 && itemNum<=4)
+    if (itemNum >= 1 && itemNum <= 4)
     {
         itemCount++;
         searchItem(itemNum, MotherBoard);
@@ -345,10 +343,9 @@ chooseMotherBoard:
         printf("\n\t Try Again\n\n");
         goto chooseMotherBoard;
     }
-
 }
 
-//Function to choose Casing
+// Function to choose Casing
 void chooseCasing()
 {
     system("cls");
@@ -359,9 +356,9 @@ chooseCasing:
     displayItem(Casing);
     int itemNum;
     scanf("%d", &itemNum);
-    if(itemNum == 10)
+    if (itemNum == 10)
         productListing();
-    if(itemNum>=1 && itemNum<=4)
+    if (itemNum >= 1 && itemNum <= 4)
     {
         itemCount++;
         searchItem(itemNum, Casing);
@@ -373,7 +370,6 @@ chooseCasing:
         printf("\n\t Try Again\n\n");
         goto chooseCasing;
     }
-
 }
 
 // Function to choose Power Supply
@@ -387,9 +383,9 @@ choosePowerSupply:
     displayItem(PowerSupply);
     int itemNum;
     scanf("%d", &itemNum);
-    if(itemNum == 10)
+    if (itemNum == 10)
         productListing();
-    if(itemNum>=1 && itemNum<=4)
+    if (itemNum >= 1 && itemNum <= 4)
     {
         itemCount++;
         searchItem(itemNum, PowerSupply);
@@ -401,7 +397,6 @@ choosePowerSupply:
         printf("\n\t Try Again\n\n");
         goto choosePowerSupply;
     }
-
 }
 
 // Function to add Graphics Card
@@ -415,9 +410,9 @@ chooseGraphicsCard:
     displayItem(GraphicsCard);
     int itemNum;
     scanf("%d", &itemNum);
-    if(itemNum == 10)
+    if (itemNum == 10)
         productListing();
-    if(itemNum>=1 && itemNum<=4)
+    if (itemNum >= 1 && itemNum <= 4)
     {
         itemCount++;
         searchItem(itemNum, GraphicsCard);
@@ -429,7 +424,6 @@ chooseGraphicsCard:
         printf("\n\t Try Again\n\n");
         goto chooseGraphicsCard;
     }
-
 }
 
 // Function to Choose processor
@@ -443,9 +437,9 @@ chooseProcessor:
     displayItem(Processor);
     int itemNum;
     scanf("%d", &itemNum);
-    if(itemNum == 10)
+    if (itemNum == 10)
         productListing();
-    if(itemNum>=1 && itemNum<=4)
+    if (itemNum >= 1 && itemNum <= 4)
     {
         itemCount++;
         searchItem(itemNum, Processor);
@@ -459,32 +453,51 @@ chooseProcessor:
     }
 }
 
+void saveAsFile(){
+    FILE *fptr;
+    char exten[5] = ".txt";
+    char customerName[100];
+    strcat(customerName, CustomerInfo.name);
+    strcat(customerName, exten);
+
+    //Create File with Customer Name
+    fptr = fopen(customerName, "w");
+    fprintf(fptr, "\n\t\t\t===================== ** // Bangi PC Building Solution ** =====================");
+    fprintf(fptr, "\n\n\t\t\t\t Customer Name: ");
+    fprintf(fptr, CustomerInfo.name);
+    fprintf(fptr, "\n\n");
+
+
+    //Close created file
+    fclose(fptr);
+}
+
 void deleteSelectedItem()
 {
     system("cls");
     printInfo();
     displayTotalItem();
-    if(itemCount>=1)
+    if (itemCount >= 1)
     {
         printf("\n\nEnter the element position to delete : or -1 to back main\n");
         scanf("%d", &elementPosition);
 
-        if(elementPosition == -1)
+        if (elementPosition == -1)
             productListing();
 
         /* Invalid delete position */
-        if(elementPosition <=0 && elementPosition>itemCount)
+        if (elementPosition <= 0 && elementPosition > itemCount)
         {
             printf("Invalid position! Please enter position between 1 to %d", itemCount);
         }
-        else if(elementPosition<=itemCount)
+        else if (elementPosition <= itemCount)
         {
-            if(elementPosition == 1 && itemCount == 1)
+            if (elementPosition == 1 && itemCount == 1)
             {
                 totalPrice = 0;
                 free(TotalItem);
             }
-            else if(elementPosition == 1)
+            else if (elementPosition == 1)
             {
                 struct list *temp;
                 temp = TotalItem;
@@ -493,11 +506,11 @@ void deleteSelectedItem()
                 free(temp);
             }
 
-            else if(elementPosition == itemCount)
+            else if (elementPosition == itemCount)
             {
                 struct list *temp, *previous;
                 temp = TotalItem;
-                while(--elementPosition)
+                while (--elementPosition)
                 {
                     previous = temp;
                     temp = temp->next;
@@ -510,12 +523,12 @@ void deleteSelectedItem()
             {
                 struct list *temp, *previous;
                 temp = TotalItem;
-                while(--elementPosition)
+                while (--elementPosition)
                 {
                     previous = temp;
                     temp = temp->next;
                 }
-                if(temp->next == NULL)
+                if (temp->next == NULL)
                     previous->next = NULL;
                 else
                     previous->next = temp->next;
@@ -524,7 +537,7 @@ void deleteSelectedItem()
             }
 
             /* Decrement array size by 1 */
-            printf("Deleted Successfully!\t Product Serial No ----\t>%d",elementPosition);
+            printf("Deleted Successfully!\t Product Serial No ----\t>%d", elementPosition);
             itemCount--;
         }
         else
@@ -608,18 +621,24 @@ void productListing()
         break;
     }
 
+    case 9:
+    {
+        saveAsFile();
+        printf("Working\n");
+        break;
+    }
+
     case 0:
     {
         printf("\nEnding the Program. Thanks for choosing Bangi PC Building Solution.See You Later.  \n\n");
         exit(0);
     }
-    default :
+    default:
     {
         printf("\nInvalid Choice. Select From the option\n");
         productListing();
     }
     }
-
 }
 
 int main()
