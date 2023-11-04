@@ -91,7 +91,7 @@ void monitorList()
     m1->price = 9000.00;
     m1->next = m2;
 
-    strcpy(m2->name, "[2]\tHP V19125QR 18.5 Inch HD Monitor\t-----\t Price: 10400 tk");
+    strcpy(m2->name, "[2]\tHP V19125QR 18.5 Inch HD Monitor\t-----\t Price: 14000 tk");
     m2->price = 14000.00;
     m2->next = m3;
 
@@ -119,7 +119,7 @@ void motherBoardList()
     mb1->next = mb2;
 
     strcpy(mb2->name, "[2]\tGigabyte GA-H81M-S2 Motherboard\t\t-----\tPrice: 7900  tk");
-    mb2->price = 7000.00;
+    mb2->price = 7900.00;
     mb2->next = mb3;
 
     strcpy(mb3->name, "[3]\tGigabyte B6 12thGen Motherboard\t\t-----\tPrice: 20500 tk");
@@ -141,12 +141,12 @@ void casingList()
     c3 = (struct list *)malloc(sizeof(struct list));
     c4 = (struct list *)malloc(sizeof(struct list));
 
-    strcpy(c1->name, "[1]\tMaxGreen A363BK ATSX 5S04 Casing\t-----\tPrice: 5450  tk");
+    strcpy(c1->name, "[1]\tMaxGreen A363BK ATSX 5S04 Casing\t-----\tPrice: 5400  tk");
     c1->price = 5400.00;
     c1->next = c2;
 
-    strcpy(c2->name, "[2]\tMaxGreen G563BL Window AX Casing\t-----\tPrice: 4050  tk");
-    c2->price = 4050.00;
+    strcpy(c2->name, "[2]\tMaxGreen G563BL Window AX Casing\t-----\tPrice: 4000  tk");
+    c2->price = 4000.00;
     c2->next = c3;
 
     strcpy(c3->name, "[3]\tCorsair 60X RGB ATX Smart Casing\t-----\tPrice: 24500 tk");
@@ -169,19 +169,19 @@ void graphicsList()
     g4 = (struct list *)malloc(sizeof(struct list));
 
     strcpy(g1->name, "[1]\tGForce G730K  2GB Graphics Card\t\t-----\tPrice: 7050  tk");
-    g1->price = 9000.00;
+    g1->price = 7050.00;
     g1->next = g2;
 
     strcpy(g2->name, "[2]\tGeForce 1050T 4GB Graphics Card\t\t-----\tPrice: 22500 tk");
-    g2->price = 14000.00;
+    g2->price = 22500.00;
     g2->next = g3;
 
     strcpy(g3->name, "[3]\tPaGeForce RTX 8GB Graphics Card\t\t-----\tPrice: 41900 tk");
-    g3->price = 12000.00;
+    g3->price = 41000.00;
     g3->next = g4;
 
     strcpy(g4->name, "[4]\tGigabyte RTX 12 GBGraphics Card\t\t-----\tPrice: 58000 tk");
-    g4->price = 19700.00;
+    g4->price = 58000.00;
     g4->next = NULL;
 
     GraphicsCard = g1;
@@ -475,6 +475,7 @@ void saveAsFile(){
         fprintf(fptr, "\n%s", temp->name);  // Use temp->name to access the name
         temp = temp->next;
     }
+    totalPriceCount();
     fprintf(fptr, "\n-----------------------------------------------------------------------");
     fprintf(fptr, "\nNumber of total item-------------------------------------%d", itemCount);
     fprintf(fptr, "\nTotal price----------------------------------------------%.2f\n", totalPrice);
