@@ -454,6 +454,7 @@ chooseProcessor:
 }
 
 void saveAsFile(){
+
     FILE *fptr;
     char exten[5] = ".txt";
     char customerName[100];
@@ -463,13 +464,26 @@ void saveAsFile(){
     //Create File with Customer Name
     fptr = fopen(customerName, "w");
     fprintf(fptr, "\n\t\t\t===================== ** // Bangi PC Building Solution ** =====================");
-    fprintf(fptr, "\n\n\t\t\t\t Customer Name: ");
+    fprintf(fptr, "\n\n\t\t\t\t\t\t Customer Name: ");
     fprintf(fptr, CustomerInfo.name);
     fprintf(fptr, "\n\n");
 
+    struct list *temp;
+    temp = TotalItem;
+
+    while (temp != NULL) {  // Use temp instead of TotalItem
+        fprintf(fptr, "\n%s", temp->name);  // Use temp->name to access the name
+        temp = temp->next;
+    }
+    fprintf(fptr, "\n-----------------------------------------------------------------------");
+    fprintf(fptr, "\nNumber of total item-------------------------------------%d", itemCount);
+    fprintf(fptr, "\nTotal price----------------------------------------------%.2f\n", totalPrice);
 
     //Close created file
     fclose(fptr);
+    printf("\nSuccessfully save the product list\n");
+
+    productListing();
 }
 
 void deleteSelectedItem()
