@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int itemCount = 0, i;
+int itemCount = 0;
 int elementPosition;
 float totalPrice = 0;
 struct list
@@ -273,8 +273,8 @@ void addItem(struct list *nodeItem)
         temp = (struct list *)malloc(sizeof(list));
         strcpy(temp->name, nodeItem->name);
         temp->price = nodeItem->price;
-        position->next = temp;
         temp->next = NULL;
+        position->next = temp;
         position = temp;
     }
     printf("\n Successfully Added! %s\n", nodeItem->name);
@@ -453,7 +453,8 @@ chooseProcessor:
     }
 }
 
-void saveAsFile(){
+void saveAsFile()
+{
 
     FILE *fptr;
     char exten[5] = ".txt";
@@ -471,7 +472,8 @@ void saveAsFile(){
     struct list *temp;
     temp = TotalItem;
 
-    while (temp != NULL) {  // Use temp instead of TotalItem
+    while (temp != NULL)    // Use temp instead of TotalItem
+    {
         fprintf(fptr, "\n%s", temp->name);  // Use temp->name to access the name
         temp = temp->next;
     }
@@ -497,32 +499,29 @@ void deleteSelectedItem()
         printf("\n\nEnter the element position to delete : or -1 to back main\n");
         scanf("%d", &elementPosition);
 
-        if (elementPosition == -1)
-            productListing();
-
         /* Invalid delete position */
-        if (elementPosition <= 0 && elementPosition > itemCount)
+        if (elementPosition <= 0 || elementPosition > itemCount)
         {
             printf("Invalid position! Please enter position between 1 to %d", itemCount);
+            deleteSelectedItem();
         }
         else if (elementPosition <= itemCount)
         {
             if (elementPosition == 1 && itemCount == 1)
             {
-                totalPrice = 0;
                 free(TotalItem);
             }
             else if (elementPosition == 1)
             {
                 struct list *temp;
                 temp = TotalItem;
-                totalPrice -= TotalItem->price;
                 TotalItem = TotalItem->next;
                 free(temp);
             }
 
             else if (elementPosition == itemCount)
             {
+                printf("YEs\n");
                 struct list *temp, *previous;
                 temp = TotalItem;
                 while (--elementPosition)
@@ -530,8 +529,8 @@ void deleteSelectedItem()
                     previous = temp;
                     temp = temp->next;
                 }
-                totalPrice -= temp->price;
                 previous->next = NULL;
+                position = previous;
                 free(temp);
             }
             else
@@ -543,23 +542,20 @@ void deleteSelectedItem()
                     previous = temp;
                     temp = temp->next;
                 }
-                if (temp->next == NULL)
-                    previous->next = NULL;
-                else
-                    previous->next = temp->next;
-                totalPrice -= temp->price;
+                previous->next = temp->next;
                 free(temp);
             }
+            itemCount--;
 
             /* Decrement array size by 1 */
             printf("Deleted Successfully!\t Product Serial No ----\t>%d", elementPosition);
-            itemCount--;
         }
         else
         {
             printf("Invalid Option. Choose the right option\n");
             deleteSelectedItem();
         }
+
     }
     else
     {
