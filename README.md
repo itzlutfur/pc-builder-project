@@ -7,7 +7,7 @@ This repository contains the source code, tests, and minimal build instructions.
 Author: itzlutfur  
 Language: C++ (100%)
 
-##What I did:
+## What I did:
 - Implemented DSA fundamentals including linkedlist, stack, queue, and structure.
 - The project was developed with a command-line interface (CLI).
 - The build configuration can be exported to a TXT file.
